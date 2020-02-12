@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>Ajax quest challenge</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+  <link rel='stylesheet' href='https://unpkg.com/bulma@0.7.5/css/bulma.min.css'>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+    integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    
+  <style>
+  </style>
+</head>
+
+<body>
+  <section class="section">
+    <div class="container">
+      <h1 class="title">Chuck Norris Jokes</h1>
+      <p>Reload for another joke!</p>
+
+      <div class="content" id="chuck-norris">
+      </div>
+      <button id="reload">Reload the quote!</button>
+    </div>
+
+  </section>
+
+  <!-- We need to load axios first! -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js" integrity="sha256-S1J4GVHHDMiirir9qsXWc8ZWw74PHHafpsHp5PXtjTs=" crossorigin="anonymous"></script>
+  <script>
+     const ChuckFetch = () => {
+          const quote = ''
+          const url ='https://api.chucknorris.io/jokes/random'
+          axios.get(url)
+        .then(res=>res.data)
+        .then(chuck=> {
+            //console.log(chuck)  
+            // Build a block of HTML
+            const chuckDisplay = `<img src="${chuck.icon_url}" />
+            <h2>${chuck.value}</h2>`;
+
+            //print API
+            document.getElementById('chuck-norris').innerHTML = chuckDisplay;
+        })
+     }
+     const Reload = () =>{
+         document.getElementById('reload').addEventListener('click', function(){
+             location.reload()
+         })
+     }
+      ChuckFetch()
+      Reload()
+  </script>
+</body>
+
+</html>
